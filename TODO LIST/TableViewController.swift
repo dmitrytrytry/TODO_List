@@ -1,13 +1,5 @@
-//
-//  TableViewController.swift
-//  TODO LIST
-//
-//  Created by MacBook Pro on 6/28/22.
-//
 import Foundation
 import UIKit
-
-
 
 class TableViewController: UITableViewController {
     
@@ -16,25 +8,25 @@ class TableViewController: UITableViewController {
     }
     
     @IBAction func pushAddAction(_ sender: Any) {
-        let AlertController = UIAlertController(title: "Create new item", message: nil, preferredStyle: .alert)
-        AlertController.addTextField { (textField) in
-            textField.placeholder = "New item name"
+        let alertController = UIAlertController(title: "Create new item", message: nil, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "New itmin_lengthem name"
         }
         
-       let AlertAction = UIAlertAction(title: "Cancel", style: .default) { (alert) in
+       let alertAction = UIAlertAction(title: "Cancel", style: .default) { _ in
         }
         
-        let AlertAction1 = UIAlertAction(title: "Create", style: .cancel) { (alert) in
-            let newItem = AlertController.textFields![0].text
+        let alertAction1 = UIAlertAction(title: "Create", style: .cancel) { _ in
+            let newItem = alertController.textFields![0].text
             addItem(nameItem: newItem!)
             self.tableView.reloadData()
 
         }
         
-        AlertController.addAction(AlertAction)
-        AlertController.addAction(AlertAction1)
+        alertController.addAction(alertAction)
+        alertController.addAction(alertAction1)
 
-        present(AlertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -46,12 +38,12 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ToDoItems.count
+        return toDoItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let currentItem = ToDoItems[indexPath.row]
+        let currentItem = toDoItems[indexPath.row]
         cell.textLabel?.text = (currentItem["Name"] as? String)
         
         if (currentItem["isCompleted"] as? Bool) == true {
@@ -67,7 +59,11 @@ class TableViewController: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath
+    ) {
         if editingStyle == .delete {
             removeItem(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -83,8 +79,6 @@ class TableViewController: UITableViewController {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
         }
     }
-    
-
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

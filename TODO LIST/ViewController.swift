@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  TODO LIST
-//
-//  Created by MacBook Pro on 6/28/22.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -14,6 +7,4 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
 }
-
