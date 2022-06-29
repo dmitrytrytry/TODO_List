@@ -1,38 +1,23 @@
-//
-//  Model.swift
-//  TODO_LIST
-//
-//  Created by MacBook Pro on 6/28/22.
-//
-
 import Foundation
 
-var toDoItems: [[String: Any]] {
-    get {
-        if let array = UserDefaults.standard.array(forKey: "ToDoDataKey") as? [[String: Any]] {
-            return array
-        } else {
-            return []
-        }
-    }
-    set {
-        UserDefaults.standard.set(newValue, forKey: "ToDoDataKey")
-        UserDefaults.standard.synchronize()
-    }
-    
+struct ToDo {
+    var name: String
+    var completed: Bool
 }
 
-func addItem(nameItem: String, isCompeted: Bool = false) {
-    toDoItems.append(["Name": nameItem, "isCompleted": false])
+var toDoItems: [ToDo] = []
+
+func addItem(todo: ToDo) {
+    toDoItems.append(todo)
 }
 
 func removeItem(at index: Int) {
     toDoItems.remove(at: index)
 }
 
-func changeState(at item: Int) -> Bool {
-    toDoItems[item]["isCompleted"] = !(toDoItems[item]["isCompleted"] as? Bool ?? false)
-    return (toDoItems[item]["isCompleted"] != nil)
+func changeState(at index: Int) -> Bool {
+    toDoItems[index].completed = !toDoItems[index].completed
+    return toDoItems[index].completed
 }
 
 func moveItem(fromIndex: Int, toIndex: Int) {

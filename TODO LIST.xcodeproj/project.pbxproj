@@ -61,11 +61,11 @@
 				52D4F8E5286AD857007DBA9E /* AppDelegate.swift */,
 				52D4F8E7286AD857007DBA9E /* SceneDelegate.swift */,
 				52D4F8F9286AF52E007DBA9E /* TableViewController.swift */,
+				52D4F8FB286AF5B0007DBA9E /* Model.swift */,
 				52D4F8EB286AD857007DBA9E /* Main.storyboard */,
 				52D4F8EE286AD85C007DBA9E /* Assets.xcassets */,
 				52D4F8F0286AD85C007DBA9E /* LaunchScreen.storyboard */,
 				52D4F8F3286AD85C007DBA9E /* Info.plist */,
-				52D4F8FB286AF5B0007DBA9E /* Model.swift */,
 			);
 			path = "TODO LIST";
 			sourceTree = "<group>";

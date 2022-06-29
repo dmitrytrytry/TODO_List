@@ -10,22 +10,25 @@ class TableViewController: UITableViewController {
     @IBAction func pushAddAction(_ sender: Any) {
         let alertController = UIAlertController(title: "Create new item", message: nil, preferredStyle: .alert)
         alertController.addTextField { (textField) in
-            textField.placeholder = "New itmin_lengthem name"
+            textField.placeholder = "New item name"
         }
         
-       let alertAction = UIAlertAction(title: "Cancel", style: .default) { _ in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { _ in
         }
         
-        let alertAction1 = UIAlertAction(title: "Create", style: .cancel) { _ in
-            let newItem = alertController.textFields![0].text
-            addItem(nameItem: newItem!)
+        let createAction = UIAlertAction(title: "Create", style: .default) { _ in
+            let todo = ToDo(
+                name: alertController.textFields![0].text ?? "",
+                completed: false
+            )
+            addItem(todo: todo)
             self.tableView.reloadData()
-
+            
         }
         
-        alertController.addAction(alertAction)
-        alertController.addAction(alertAction1)
-
+        alertController.addAction(cancelAction)
+        alertController.addAction(createAction)
+        
         present(alertController, animated: true, completion: nil)
     }
     
@@ -44,14 +47,12 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let currentItem = toDoItems[indexPath.row]
-        cell.textLabel?.text = (currentItem["Name"] as? String)
-        
-        if (currentItem["isCompleted"] as? Bool) == true {
+        cell.textLabel?.text = currentItem.name
+        if currentItem.completed == true {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
         }
-        
         return cell
     }
     
